@@ -1,0 +1,447 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://sisa.msal.gob.ar/services/1.0" name="ProfesionalService" targetNamespace="http://sisa.msal.gob.ar/services/1.0">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://sisa.msal.gob.ar/services/1.0" targetNamespace="http://sisa.msal.gob.ar/services/1.0" version="1.0">
+
+  <xs:element name="Profesional" type="tns:profesional"/>
+
+  <xs:element name="ProfesionalSearchResponse" type="tns:profesionalSearchResponse"/>
+
+  <xs:element name="RegisterCounter" type="tns:registersCounter"/>
+
+  <xs:element name="getCantidadMatriculas" type="tns:getCantidadMatriculas"/>
+
+  <xs:element name="getCantidadMatriculasResponse" type="tns:getCantidadMatriculasResponse"/>
+
+  <xs:element name="getCantidadProfesionales" type="tns:getCantidadProfesionales"/>
+
+  <xs:element name="getCantidadProfesionalesResponse" type="tns:getCantidadProfesionalesResponse"/>
+
+  <xs:element name="getProfesional" type="tns:getProfesional"/>
+
+  <xs:element name="getProfesionalConDomicilioRequest" type="tns:getProfesionalConDomicilioRequest"/>
+
+  <xs:element name="getProfesionalConDomicilioResponse" type="tns:getProfesionalConDomicilioResponse"/>
+
+  <xs:element name="getProfesionalResponse" type="tns:getProfesionalResponse"/>
+
+  <xs:element name="getProfesionales" type="tns:getProfesionales"/>
+
+  <xs:element name="getProfesionalesResponse" type="tns:getProfesionalesResponse"/>
+
+  <xs:element name="profesionalSancionRequest" type="tns:profesionalSancionRequest"/>
+
+  <xs:element name="profesionalSancionResponse" type="tns:profesionalSancionResponse"/>
+
+  <xs:complexType name="profesionalSancionRequest">
+    <xs:sequence>
+      <xs:element name="usuario" type="xs:string"/>
+      <xs:element name="clave" type="xs:string"/>
+      <xs:element minOccurs="0" name="idProfesionalSancion" type="xs:long"/>
+      <xs:element name="codigoProfesional" type="xs:string"/>
+      <xs:element name="nroMatricula" type="xs:string"/>
+      <xs:element name="idProvincia" type="xs:long"/>
+      <xs:element minOccurs="0" name="idOrigenEmite" type="xs:long"/>
+      <xs:element minOccurs="0" name="idTipoSancion" type="xs:long"/>
+      <xs:element minOccurs="0" name="fechaSancion" type="xs:string"/>
+      <xs:element minOccurs="0" name="vigente" type="tns:boolean"/>
+      <xs:element minOccurs="0" name="fechaVigencia" type="xs:string"/>
+      <xs:element minOccurs="0" name="inhabilitacion" type="tns:boolean"/>
+      <xs:element minOccurs="0" name="expediente" type="xs:string"/>
+      <xs:element minOccurs="0" name="comentario" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="profesionalSancionResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:wsBaseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idProfesionalSancion" type="xs:long"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType abstract="true" name="wsBaseResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="resultado" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="profesionalSearchResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:wsBaseResponse">
+        <xs:sequence>
+          <xs:element name="cantidadDeResultados" type="xs:int"/>
+          <xs:element minOccurs="0" name="profesionales">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="profesional" nillable="true" type="tns:profesional"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="profesional">
+    <xs:complexContent>
+      <xs:extension base="tns:wsBaseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="apellido" type="xs:string"/>
+          <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+          <xs:element minOccurs="0" name="matriculas">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="matricula" nillable="true" type="tns:matricula"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+          <xs:element minOccurs="0" name="numeroDocumento" type="xs:string"/>
+          <xs:element minOccurs="0" name="tipoDocumento" type="xs:string"/>
+          <xs:element minOccurs="0" name="fechaRegistro" type="xs:string"/>
+          <xs:element minOccurs="0" name="fechaModificacion" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="matricula">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="matricula" type="xs:string"/>
+      <xs:element minOccurs="0" name="profesion" type="xs:string"/>
+      <xs:element minOccurs="0" name="jurisdiccion" type="xs:string"/>
+      <xs:element minOccurs="0" name="estado" type="xs:string"/>
+      <xs:element minOccurs="0" name="fechaRegistro" type="xs:string"/>
+      <xs:element minOccurs="0" name="fechaMatricula" type="xs:string"/>
+      <xs:element minOccurs="0" name="motivoSancion" type="xs:string"/>
+      <xs:element minOccurs="0" name="fechaDesde" type="xs:string"/>
+      <xs:element minOccurs="0" name="fechaHasta" type="xs:string"/>
+      <xs:element minOccurs="0" name="observaciones" type="xs:string"/>
+      <xs:element minOccurs="0" name="especialidades">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="especialidad" nillable="true" type="tns:especialidad"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="especialidad">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="especialidad" type="xs:string"/>
+      <xs:element minOccurs="0" name="fechaCertificacion" type="xs:string"/>
+      <xs:element minOccurs="0" name="nroCertificacion" type="xs:string"/>
+      <xs:element minOccurs="0" name="tipoCertificacion" type="xs:string"/>
+      <xs:element minOccurs="0" name="ministerio" type="xs:string"/>
+      <xs:element minOccurs="0" name="sociedadCientifica" type="xs:string"/>
+      <xs:element minOccurs="0" name="establecimiento" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="registersCounter">
+    <xs:complexContent>
+      <xs:extension base="tns:wsBaseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="cantidadTotal" type="xs:int"/>
+          <xs:element minOccurs="0" name="porcentajeTotal" type="xs:double"/>
+          <xs:element minOccurs="0" name="ItemList">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="tns:singleItemCounter"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="singleItemCounter">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="cantidad" type="xs:int"/>
+      <xs:element minOccurs="0" name="descripcion" type="xs:string"/>
+      <xs:element minOccurs="0" name="id" type="xs:long"/>
+      <xs:element minOccurs="0" name="porcentaje" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="profesionalFull">
+    <xs:complexContent>
+      <xs:extension base="tns:wsBaseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="apellido" type="xs:string"/>
+          <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+          <xs:element minOccurs="0" name="matriculas">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="matricula" nillable="true" type="tns:matriculaFull"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+          <xs:element minOccurs="0" name="numeroDocumento" type="xs:string"/>
+          <xs:element minOccurs="0" name="tipoDocumento" type="xs:string"/>
+          <xs:element minOccurs="0" name="fechaRegistro" type="xs:string"/>
+          <xs:element minOccurs="0" name="fechaModificacion" type="xs:string"/>
+          <xs:element minOccurs="0" name="cuil" type="xs:string"/>
+          <xs:element minOccurs="0" name="calle" type="xs:string"/>
+          <xs:element minOccurs="0" name="calleNro" type="xs:string"/>
+          <xs:element minOccurs="0" name="callePiso" type="xs:string"/>
+          <xs:element minOccurs="0" name="calleDpto" type="xs:string"/>
+          <xs:element minOccurs="0" name="idProvincia" type="xs:string"/>
+          <xs:element minOccurs="0" name="provincia" type="xs:string"/>
+          <xs:element minOccurs="0" name="idLocalidad" type="xs:string"/>
+          <xs:element minOccurs="0" name="localidad" type="xs:string"/>
+          <xs:element minOccurs="0" name="idDepartamento" type="xs:string"/>
+          <xs:element minOccurs="0" name="departamento" type="xs:string"/>
+          <xs:element minOccurs="0" name="codigoPostal" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="matriculaFull">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="matricula" type="xs:string"/>
+      <xs:element minOccurs="0" name="idProfesion" type="xs:string"/>
+      <xs:element minOccurs="0" name="profesion" type="xs:string"/>
+      <xs:element minOccurs="0" name="jurisdiccion" type="xs:string"/>
+      <xs:element minOccurs="0" name="estado" type="xs:string"/>
+      <xs:element minOccurs="0" name="fechaRegistro" type="xs:string"/>
+      <xs:element minOccurs="0" name="fechaMatricula" type="xs:string"/>
+      <xs:element minOccurs="0" name="motivoSancion" type="xs:string"/>
+      <xs:element minOccurs="0" name="fechaDesde" type="xs:string"/>
+      <xs:element minOccurs="0" name="fechaHasta" type="xs:string"/>
+      <xs:element minOccurs="0" name="observaciones" type="xs:string"/>
+      <xs:element minOccurs="0" name="idProvincia" type="xs:string"/>
+      <xs:element minOccurs="0" name="provincia" type="xs:string"/>
+      <xs:element minOccurs="0" name="especialidades">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="especialidad" nillable="true" type="tns:especialidad"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getProfesionales">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="usuario" type="xs:string"/>
+      <xs:element minOccurs="0" name="clave" type="xs:string"/>
+      <xs:element minOccurs="0" name="profesionalFilters" type="tns:profesionalFilters"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="profesionalFilters">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="apellido" type="xs:string"/>
+      <xs:element minOccurs="0" name="matricula" type="xs:string"/>
+      <xs:element minOccurs="0" name="profesion" type="xs:long"/>
+      <xs:element minOccurs="0" name="provinciaDeMatriculacion" type="xs:long"/>
+      <xs:element minOccurs="0" name="fechaRegistroDesde" type="xs:string"/>
+      <xs:element minOccurs="0" name="fechaRegistroHasta" type="xs:string"/>
+      <xs:element minOccurs="0" name="fechaModificacionDesde" type="xs:string"/>
+      <xs:element minOccurs="0" name="fechaModificacionHasta" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getProfesionalesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:profesionalSearchResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getCantidadProfesionales">
+    <xs:complexContent>
+      <xs:extension base="tns:wsBaseRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="profesionalFilters" type="tns:profesionalCantidadFilters"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType abstract="true" name="wsBaseRequest">
+    <xs:sequence>
+      <xs:element name="usuario" type="xs:string"/>
+      <xs:element name="clave" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="profesionalCantidadFilters">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nivelDeFormacion" type="xs:long"/>
+      <xs:element minOccurs="0" name="profesion" type="xs:long"/>
+      <xs:element minOccurs="0" name="profesionDeReferencia" type="xs:long"/>
+      <xs:element minOccurs="0" name="provinciaDeMatriculacion" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getCantidadMatriculas">
+    <xs:complexContent>
+      <xs:extension base="tns:wsBaseRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="profesionalFilters" type="tns:profesionalMatriculaCantidadFilters"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="profesionalMatriculaCantidadFilters">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="nivelDeFormacion" type="xs:long"/>
+      <xs:element minOccurs="0" name="profesion" type="xs:long"/>
+      <xs:element minOccurs="0" name="profesionDeReferencia" type="xs:long"/>
+      <xs:element minOccurs="0" name="provinciaDeMatriculacion" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getCantidadProfesionalesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:registersCounter"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getProfesionalConDomicilioRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="usuario" type="xs:string"/>
+      <xs:element minOccurs="0" name="clave" type="xs:string"/>
+      <xs:element minOccurs="0" name="filters" type="tns:singleProfesionalFilters"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="singleProfesionalFilters">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="apellido" type="xs:string"/>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+      <xs:element minOccurs="0" name="codigo" type="xs:string"/>
+      <xs:element minOccurs="0" name="nrodoc" type="xs:long"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getProfesionalConDomicilioResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:profesionalFull"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getCantidadMatriculasResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:registersCounter"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getProfesional">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="usuario" type="xs:string"/>
+      <xs:element minOccurs="0" name="clave" type="xs:string"/>
+      <xs:element minOccurs="0" name="filters" type="tns:singleProfesionalFilters"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getProfesionalResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:profesional"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="boolean">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SI"/>
+      <xs:enumeration value="NO"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getCantidadProfesionalesResponse">
+    <wsdl:part element="ns1:getCantidadProfesionalesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="profesionalSancion">
+    <wsdl:part element="ns1:profesionalSancionRequest" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProfesionales">
+    <wsdl:part element="ns1:getProfesionales" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProfesionalConDomicilioResponse">
+    <wsdl:part element="ns1:getProfesionalConDomicilioResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProfesionalResponse">
+    <wsdl:part element="ns1:getProfesionalResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCantidadProfesionales">
+    <wsdl:part element="ns1:getCantidadProfesionales" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="profesionalSancionResponse">
+    <wsdl:part element="ns1:profesionalSancionResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProfesionalesResponse">
+    <wsdl:part element="ns1:getProfesionalesResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProfesionalConDomicilio">
+    <wsdl:part element="ns1:getProfesionalConDomicilioRequest" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCantidadMatriculas">
+    <wsdl:part element="ns1:getCantidadMatriculas" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCantidadMatriculasResponse">
+    <wsdl:part element="ns1:getCantidadMatriculasResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProfesional">
+    <wsdl:part element="ns1:getProfesional" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ProfesionalService">
+    <wsdl:operation name="profesionalSancion">
+      <wsdl:input message="ns1:profesionalSancion" name="profesionalSancion">
+    </wsdl:input>
+      <wsdl:output message="ns1:profesionalSancionResponse" name="profesionalSancionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProfesionales">
+      <wsdl:input message="ns1:getProfesionales" name="getProfesionales">
+    </wsdl:input>
+      <wsdl:output message="ns1:getProfesionalesResponse" name="getProfesionalesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCantidadProfesionales">
+      <wsdl:input message="ns1:getCantidadProfesionales" name="getCantidadProfesionales">
+    </wsdl:input>
+      <wsdl:output message="ns1:getCantidadProfesionalesResponse" name="getCantidadProfesionalesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProfesionalConDomicilio">
+      <wsdl:input message="ns1:getProfesionalConDomicilio" name="getProfesionalConDomicilio">
+    </wsdl:input>
+      <wsdl:output message="ns1:getProfesionalConDomicilioResponse" name="getProfesionalConDomicilioResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCantidadMatriculas">
+      <wsdl:input message="ns1:getCantidadMatriculas" name="getCantidadMatriculas">
+    </wsdl:input>
+      <wsdl:output message="ns1:getCantidadMatriculasResponse" name="getCantidadMatriculasResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProfesional">
+      <wsdl:input message="ns1:getProfesional" name="getProfesional">
+    </wsdl:input>
+      <wsdl:output message="ns1:getProfesionalResponse" name="getProfesionalResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

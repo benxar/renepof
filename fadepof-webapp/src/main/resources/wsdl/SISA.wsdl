@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://impl.exposed.services.ws.server.sisa.msal.gob.ar/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://sisa.msal.gob.ar/services/1.0" name="ProfesionalServiceSoapImplService" targetNamespace="http://impl.exposed.services.ws.server.sisa.msal.gob.ar/">
+  <wsdl:import location="ProfesionalService.wsdl" namespace="http://sisa.msal.gob.ar/services/1.0">
+    </wsdl:import>
+  <wsdl:binding name="ProfesionalServiceSoapImplServiceSoapBinding" type="ns1:ProfesionalService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="profesionalSancion">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="profesionalSancion">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="profesionalSancionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProfesionales">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getProfesionales">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getProfesionalesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCantidadMatriculas">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCantidadMatriculas">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCantidadMatriculasResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCantidadProfesionales">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCantidadProfesionales">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCantidadProfesionalesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProfesional">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getProfesional">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getProfesionalResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ProfesionalServiceSoapImplService">
+    <wsdl:port binding="tns:ProfesionalServiceSoapImplServiceSoapBinding" name="ProfesionalServiceSoapImplPort">
+      <soap:address location="https://sisa.msal.gov.ar/sisa/services/profesionalService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
